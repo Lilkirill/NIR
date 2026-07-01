@@ -1,0 +1,67 @@
+rules:
+  - code: JUNIPER_SSH_RECOMMENDED
+    category: security
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_service_enabled
+    service: ssh_enabled
+    path: services.ssh_enabled
+    recommendation: Enable SSH service under system services for secure remote administration.
+    remediation_example: |
+      system {
+        services {
+          ssh;
+        }
+      }
+    confidence: 0.9
+
+  - code: JUNIPER_DEFAULT_ROUTE_RECOMMENDED
+    category: routing
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_default_route
+    path: routes
+    profiles: [default, branch-router, edge-router]
+    recommendation: Configure a default route in routing-options static when this node acts as an edge/branch router.
+    remediation_example: |
+      routing-options {
+        static {
+          route 0.0.0.0/0 next-hop <next-hop>;
+        }
+      }
+    confidence: 0.75
+
+  - code: JUNIPER_ADMIN_USER_RECOMMENDED
+    category: access
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_admin_user
+    username: admin
+    path: users
+    recommendation: Define a privileged local administrative account when local access is required.
+    remediation_example: |
+      system {
+        login {
+          user admin {
+            class super-user;
+            authentication {
+              encrypted-password "<hash>";
+            }
+          }
+        }
+      }
+    confidence: 0.7
+
+  - code: JUNIPER_MIN_INTERFACES
+    category: vendor
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    confidence: 0.9

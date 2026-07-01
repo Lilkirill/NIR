@@ -1,0 +1,47 @@
+rules:
+  - code: MIKROTIK_SSH_RECOMMENDED
+    category: security
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_service_enabled
+    service: ssh_enabled
+    path: services.ssh_enabled
+    recommendation: Enable the RouterOS SSH service for secure remote administration.
+    remediation_example: /ip service set ssh disabled=no
+    confidence: 0.85
+
+  - code: MIKROTIK_DEFAULT_ROUTE_RECOMMENDED
+    category: routing
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_default_route
+    path: routes
+    profiles: [default, branch-router, edge-router]
+    recommendation: Configure a default route when the MikroTik device acts as an edge or branch router.
+    remediation_example: /ip route add dst-address=0.0.0.0/0 gateway=<gateway>
+    confidence: 0.75
+
+  - code: MIKROTIK_ADMIN_USER_RECOMMENDED
+    category: access
+    severity: warning
+    severity_by_mode:
+      dataset: warning
+      strict: warning
+    type: require_admin_user
+    username: admin
+    path: users
+    recommendation: Create or retain a privileged administrative user for managed access.
+    remediation_example: /user add name=admin group=full password=<secret>
+    confidence: 0.7
+
+  - code: MIKROTIK_MIN_INTERFACES
+    category: vendor
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    confidence: 0.9

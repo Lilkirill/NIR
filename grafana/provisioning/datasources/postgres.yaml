@@ -1,0 +1,19 @@
+apiVersion: 1
+
+datasources:
+  - name: Validator PostgreSQL
+    uid: validator-postgres
+    type: postgres
+    access: proxy
+    url: db:5432
+    database: validator
+    user: validator
+    secureJsonData:
+      password: validator
+    jsonData:
+      sslmode: disable
+      postgresVersion: 1600
+      timescaledb: false
+      connMaxLifetime: 14400
+      maxIdleConns: 100
+      maxOpenConns: 100

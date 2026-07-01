@@ -1,0 +1,50 @@
+rules:
+  - code: SSH_REQUIRED
+    category: security
+    severity: error
+    type: require_service_enabled
+    service: ssh_enabled
+    path: services.ssh_enabled
+    recommendation: Enable SSH management access for secure administration.
+    remediation_example: |
+      line vty 0 4
+       transport input ssh
+    confidence: 1.0
+
+  - code: DEFAULT_ROUTE_REQUIRED
+    category: routing
+    severity: error
+    type: require_default_route
+    path: routes
+    profiles: [default, branch-router, edge-router]
+    recommendation: Configure a default route or an equivalent upstream gateway.
+    remediation_example: ip route 0.0.0.0 0.0.0.0 <next-hop>
+    confidence: 1.0
+
+  - code: PASSWORD_ENCRYPTION_REQUIRED
+    category: security
+    severity: warning
+    type: require_service_enabled
+    service: password_encryption
+    path: services.password_encryption
+    recommendation: Enable password encryption for locally stored secrets.
+    remediation_example: service password-encryption
+    confidence: 1.0
+
+  - code: ADMIN_USER_REQUIRED
+    category: access
+    severity: warning
+    type: require_admin_user
+    username: admin
+    path: users
+    recommendation: Create an administrative account with privileged access.
+    remediation_example: username admin privilege 15 secret 5 <secret>
+    confidence: 1.0
+
+  - code: CISCO_MIN_INTERFACES
+    category: vendor
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    confidence: 0.9

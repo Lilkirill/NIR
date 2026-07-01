@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>{{ title }}</title>
+<style>
+body{font-family:Arial,sans-serif;margin:40px;background:#f9fafb;color:#111827}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.card{background:white;border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid #e5e7eb}th{text-align:left;background:#f3f4f6}.ok{color:green}.bad{color:red}.warn{color:#b45309}
+</style></head><body>
+<h1>{{ title }}</h1>
+<div class="grid">
+<div class="card"><h3>Total runs</h3><div>{{ metrics.total_runs }}</div></div>
+<div class="card"><h3>Passed</h3><div class="ok">{{ metrics.passed_runs }}</div></div>
+<div class="card"><h3>Failed</h3><div class="bad">{{ metrics.failed_runs }}</div></div>
+<div class="card"><h3>Unexpected failed</h3><div class="warn">{{ metrics.unexpected_failed_runs }}</div></div>
+<div class="card"><h3>Open issues</h3><div>{{ metrics.open_issues }}</div></div>
+</div>
+<div class="card" style="margin-top:20px">
+<h2>Devices</h2>
+<table><tr><th>ID</th><th>Vendor</th><th>Hostname</th><th>IP</th><th>Site</th><th>Role</th><th>Status</th></tr>{% for d in devices %}<tr><td>{{ d.id }}</td><td>{{ d.vendor }}</td><td>{{ d.hostname }}</td><td>{{ d.ip_address or '' }}</td><td>{{ d.site or '' }}</td><td>{{ d.role or '' }}</td><td>{{ d.last_status or '' }}</td></tr>{% endfor %}</table>
+</div>
+<div class="card" style="margin-top:20px">
+<h2>Latest runs</h2>
+<table><tr><th>ID</th><th>Vendor</th><th>Hostname</th><th>Status</th><th>Kind</th><th>Failure kind</th><th>Created</th></tr>{% for r in runs %}<tr><td>{{ r.id }}</td><td>{{ r.vendor }}</td><td>{{ r.hostname }}</td><td>{{ r.status }}</td><td>{{ r.run_kind or '' }}</td><td>{{ r.failure_kind or '' }}</td><td>{{ r.created_at }}</td></tr>{% endfor %}</table>
+</div>
+<div class="card" style="margin-top:20px">
+<h2>Open issues</h2>
+<table><tr><th>ID</th><th>Status</th><th>Severity</th><th>Cause</th><th>Summary</th><th>Last seen</th></tr>{% for i in issues %}<tr><td>{{ i.id }}</td><td>{{ i.status }}</td><td>{{ i.severity }}</td><td>{{ i.root_cause or '' }}</td><td>{{ i.summary }}</td><td>{{ i.last_seen_at }}</td></tr>{% endfor %}</table>
+</div>
+</body></html>

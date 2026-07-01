@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["vendor", "hostname", "interfaces", "routes", "services", "users"],
+  "properties": {
+    "vendor": {"type": "string", "enum": ["cisco", "juniper", "mikrotik", "arista", "huawei"]},
+    "hostname": {"type": "string", "minLength": 1},
+    "interfaces": {"type": "array", "items": {"type": "object", "required": ["name", "description", "enabled", "addresses"], "properties": {"name": {"type": "string"}, "description": {"type": "string"}, "enabled": {"type": "boolean"}, "addresses": {"type": "array", "items": {"type": "string"}}}}},
+    "routes": {"type": "array", "items": {"type": "object", "required": ["destination", "next_hop"], "properties": {"destination": {"type": "string"}, "next_hop": {"type": "string"}}}},
+    "services": {"type": "object", "required": ["ssh_enabled", "password_encryption"], "properties": {"ssh_enabled": {"type": "boolean"}, "password_encryption": {"type": "boolean"}}},
+    "users": {"type": "array", "items": {"type": "object"}}
+  }
+}

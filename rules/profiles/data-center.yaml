@@ -1,0 +1,7 @@
+rules:
+  - code: DATACENTER_MIN_INTERFACES
+    category: profile
+    severity: warning
+    type: minimum_interfaces
+    minimum: 2
+    path: interfaces

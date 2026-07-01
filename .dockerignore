@@ -1,0 +1,9 @@
+.venv
+__pycache__
+.pytest_cache
+validator.db
+reports_output
+logs
+saved_configs
+exports
+.git

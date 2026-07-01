@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+validator.db
+reports_output/*
+!reports_output/.gitkeep
+logs/*
+!logs/.gitkeep
+saved_configs/*
+!saved_configs/.gitkeep
+!saved_configs/cisco/.gitkeep
+exports/*
+.env

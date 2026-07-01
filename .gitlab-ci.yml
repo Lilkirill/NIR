@@ -1,0 +1,18 @@
+stages: [test, build]
+
+unit_tests:
+  stage: test
+  image: python:3.11
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - pytest -q
+
+build_image:
+  stage: build
+  image: docker:27
+  services: [docker:27-dind]
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - docker build -t network-config-validator:$CI_COMMIT_SHA .

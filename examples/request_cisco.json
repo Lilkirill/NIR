@@ -1,0 +1,19 @@
+{
+  "vendor": "cisco",
+  "hostname": "branch-r1",
+  "config_text": "hostname branch-r1
+interface GigabitEthernet0/0
+ description Uplink
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+line vty 0 4
+ transport input ssh
+ login local
+!
+service password-encryption
+ip domain-name corp.local
+username admin privilege 15 secret 0 SuperSecret123
+"
+}

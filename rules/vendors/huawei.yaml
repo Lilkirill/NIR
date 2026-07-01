@@ -1,0 +1,46 @@
+rules:
+  - code: HUAWEI_SSH_REQUIRED
+    category: security
+    severity: error
+    severity_by_mode:
+      dataset: warning
+    type: require_service_enabled
+    service: ssh_enabled
+    path: services.ssh_enabled
+    recommendation: Enable SSH/STelnet management access on Huawei VRP devices.
+    remediation_example: |
+      stelnet server enable
+      ssh server-source all-interface
+    confidence: 0.9
+
+  - code: HUAWEI_DEFAULT_ROUTE_RECOMMENDED
+    category: routing
+    severity: warning
+    type: require_default_route
+    path: routes
+    profiles: [default, branch-router, edge-router]
+    recommendation: Configure a default route when the Huawei device acts as an edge or branch router.
+    remediation_example: ip route-static 0.0.0.0 0.0.0.0 <next-hop>
+    confidence: 0.8
+
+  - code: HUAWEI_ADMIN_USER_RECOMMENDED
+    category: access
+    severity: warning
+    type: require_admin_user
+    username: admin
+    path: users
+    recommendation: Configure a local administrative user or document an external AAA-only policy.
+    remediation_example: |
+      aaa
+       local-user admin password irreversible-cipher <secret>
+       local-user admin privilege level 15
+       local-user admin service-type ssh terminal
+    confidence: 0.75
+
+  - code: HUAWEI_MIN_INTERFACES
+    category: vendor
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    confidence: 0.9

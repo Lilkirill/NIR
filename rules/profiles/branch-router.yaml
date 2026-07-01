@@ -1,0 +1,7 @@
+rules:
+  - code: BRANCH_HOSTNAME_PREFIX
+    category: profile
+    severity: warning
+    type: require_hostname_prefix
+    prefix: BRANCH-
+    path: hostname

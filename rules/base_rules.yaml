@@ -1,0 +1,10 @@
+rules:
+  - code: GENERIC_MIN_INTERFACES
+    category: structure
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    recommendation: Ensure the configuration exposes at least one L3/L2 interface for inventory normalization.
+    remediation_example: Add or export interface definitions in the vendor-native syntax.
+    confidence: 0.8

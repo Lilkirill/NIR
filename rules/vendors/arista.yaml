@@ -1,0 +1,42 @@
+rules:
+  - code: ARISTA_SSH_REQUIRED
+    category: security
+    severity: error
+    severity_by_mode:
+      dataset: warning
+    type: require_service_enabled
+    service: ssh_enabled
+    path: services.ssh_enabled
+    recommendation: Enable EOS SSH management access for secure administration.
+    remediation_example: |
+      management ssh
+        idle-timeout 30
+    confidence: 0.9
+
+  - code: ARISTA_DEFAULT_ROUTE_RECOMMENDED
+    category: routing
+    severity: warning
+    type: require_default_route
+    path: routes
+    profiles: [default, branch-router, edge-router]
+    recommendation: Configure a default route when the Arista device is used as an edge or branch router.
+    remediation_example: ip route 0.0.0.0/0 <next-hop>
+    confidence: 0.8
+
+  - code: ARISTA_ADMIN_USER_RECOMMENDED
+    category: access
+    severity: warning
+    type: require_admin_user
+    username: admin
+    path: users
+    recommendation: Configure a local administrative account or document an external AAA-only policy.
+    remediation_example: username admin privilege 15 secret <secret>
+    confidence: 0.75
+
+  - code: ARISTA_MIN_INTERFACES
+    category: vendor
+    severity: warning
+    type: minimum_interfaces
+    minimum: 1
+    path: interfaces
+    confidence: 0.9
